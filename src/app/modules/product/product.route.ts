@@ -7,8 +7,8 @@ const router = express.Router();
 
 // will call controller function
 router.post(
-  '/create-course',
-  validateRequest(ProductValidations.createProductValidationSchema),
+  '/create-product',
+  // validateRequest(ProductValidations.createProductValidationSchema),
   ProductControllers.createProduct,
 );
 

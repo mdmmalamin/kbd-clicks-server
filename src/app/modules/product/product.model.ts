@@ -3,14 +3,10 @@ import { TProduct } from './product.interface';
 
 const productSchema = new Schema<TProduct>(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
