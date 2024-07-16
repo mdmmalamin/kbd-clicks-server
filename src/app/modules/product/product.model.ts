@@ -35,6 +35,10 @@ const productSchema = new Schema<TProduct>(
       },
       default: 'in-stock',
     },
+    img: {
+      type: String,
+      required: true,
+    },
     isDeleted: {
       type: Boolean,
       default: false,

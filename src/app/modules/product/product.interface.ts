@@ -6,5 +6,6 @@ export type TProduct = {
   price: number;
   rating: number;
   status: 'in-stock' | 'out-of-stock' | 'discontinued';
+  img: string;
   isDeleted: boolean;
 };

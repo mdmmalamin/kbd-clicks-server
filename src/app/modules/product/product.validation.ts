@@ -9,6 +9,7 @@ const createProductValidationSchema = z.object({
     price: z.number(),
     rating: z.number(),
     status: z.enum(['in-stock', 'out-of-stock', 'discontinued']),
+    img: z.string(),
 
     isDeleted: z.boolean().optional(),
   }),
@@ -23,6 +24,7 @@ const updateProductValidationSchema = z.object({
     price: z.number().optional(),
     rating: z.number().optional(),
     status: z.enum(['in-stock', 'out-of-stock', 'discontinued']).optional(),
+    img: z.string().optional(),
 
     isDeleted: z.boolean().optional(),
   }),
