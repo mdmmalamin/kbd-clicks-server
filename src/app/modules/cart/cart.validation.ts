@@ -11,8 +11,8 @@ const createCartValidationSchema = z.object({
 
 const updateCartValidationSchema = z.object({
   body: z.object({
-    productId: z.string(),
-    quantity: z.number().optional(),
+    // productId: z.string(),
+    quantity: z.number(),
 
     isDeleted: z.boolean().optional(),
   }),

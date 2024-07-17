@@ -6,10 +6,17 @@ const createCartIntoDB = async (payload: TCart) => {
   return result;
 };
 
+const getAllCartsFromDB = async () => {
+  const result = await Cart.find().populate('productId');
+  return result;
+};
+
 const updateCartIntoDB = async (id: string, payload: Partial<TCart>) => {
-  const result = await Cart.findOneAndUpdate({ _id: id }, payload, {
+  const result = await Cart.findByIdAndUpdate({ _id: id }, payload, {
     new: true,
+    runValidators: true,
   });
+
   return result;
 };
 
@@ -24,6 +31,7 @@ const deleteCartFromDB = async (id: string) => {
 
 export const CartServices = {
   createCartIntoDB,
+  getAllCartsFromDB,
   updateCartIntoDB,
   deleteCartFromDB,
 };

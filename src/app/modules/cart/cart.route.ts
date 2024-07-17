@@ -11,6 +11,8 @@ router.post(
   CartControllers.createCart,
 );
 
+router.get('/', CartControllers.getAllCart);
+
 router.patch(
   '/:id',
   validateRequest(CartValidations.updateCartValidationSchema),
