@@ -9,7 +9,7 @@ const cartSchema = new Schema<TCart>(
       required: true,
     },
 
-    quantity: {
+    orderQty: {
       type: Number,
       required: true,
     },

@@ -15,12 +15,24 @@ const createCart = catchAsync(async (req, res) => {
 });
 
 const getAllCart = catchAsync(async (req, res) => {
-  const result = await CartServices.getAllCartsFromDB();
+  const result = await CartServices.getAllCartsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Cart are retrieved successfully!',
+    data: result,
+  });
+});
+
+const getOneCart = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await CartServices.getOneCartFromDB(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Cart is retrieved successfully!',
     data: result,
   });
 });
@@ -52,6 +64,7 @@ const deleteCart = catchAsync(async (req, res) => {
 export const CartControllers = {
   createCart,
   getAllCart,
+  getOneCart,
   updateCart,
   deleteCart,
 };

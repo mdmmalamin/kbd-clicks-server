@@ -13,6 +13,8 @@ router.post(
 
 router.get('/', CartControllers.getAllCart);
 
+router.get('/:id', CartControllers.getOneCart);
+
 router.patch(
   '/:id',
   validateRequest(CartValidations.updateCartValidationSchema),
