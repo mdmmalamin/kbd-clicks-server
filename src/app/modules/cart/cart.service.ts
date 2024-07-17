@@ -2,6 +2,7 @@ import { TCart } from './cart.interface';
 import { Cart } from './cart.model';
 
 const createCartIntoDB = async (payload: TCart) => {
+  console.log(payload);
   const result = await Cart.create(payload);
   return result;
 };
