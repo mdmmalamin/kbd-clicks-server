@@ -23,4 +23,6 @@ router.patch(
 
 router.delete('/:id', CartControllers.deleteCart);
 
+router.post('/place-order', CartControllers.placeOrder);
+
 export const CartRoutes = router;

@@ -9,11 +9,7 @@ const createProductIntoDB = async (payload: TProduct) => {
 };
 
 const getAllProductsFromDB = async (query: Record<string, unknown>) => {
-  const productQuery = new QueryBuilder(
-    Product.find(),
-    // .populate('preRequisiteCourses.course'),
-    query,
-  )
+  const productQuery = new QueryBuilder(Product.find(), query)
     .search(ProductSearchableFields)
     .filter()
     .sort()
@@ -26,12 +22,17 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
 
 const getOneProductFromDB = async (id: string) => {
   const result = await Product.findById(id);
-  // .populate('preRequisiteCourses.course');
+
   return result;
 };
 
 const updateProductIntoDB = async (id: string, payload: Partial<TProduct>) => {
-  console.log(id, payload);
+  const result = await Product.findByIdAndUpdate({ _id: id }, payload, {
+    new: true,
+    runValidators: true,
+  });
+
+  return result;
 };
 
 const deleteProductFromDB = async (id: string) => {

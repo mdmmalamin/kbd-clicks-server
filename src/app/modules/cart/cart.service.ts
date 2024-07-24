@@ -1,4 +1,5 @@
 import QueryBuilder from '../../builder/QueryBuilder';
+import { Product } from '../product/product.model';
 import { TCart } from './cart.interface';
 import { Cart } from './cart.model';
 
@@ -37,10 +38,53 @@ const deleteCartFromDB = async (id: string) => {
   return result;
 };
 
+const placeOrderIntoDB = async () => {
+  const allCarts = await Cart.find().populate('productId');
+
+  const placedOrder = allCarts?.map(async (cart) => {
+    const orderDetails = {
+      id: cart?.productId?._id,
+      productQty: cart.productId.quantity as number,
+      qty: cart?.orderQty,
+    };
+
+    const stockQty = orderDetails.productQty - orderDetails.qty;
+
+    if (stockQty === 0) {
+      await Product.findByIdAndUpdate(
+        { _id: orderDetails.id },
+        { quantity: stockQty, isDeleted: true },
+        {
+          new: true,
+          runValidators: true,
+        },
+      );
+    } else {
+      await Product.findByIdAndUpdate(
+        { _id: orderDetails.id },
+        { quantity: stockQty },
+        {
+          new: true,
+          runValidators: true,
+        },
+      );
+    }
+
+    const id = cart?._id;
+
+    const result = await Cart.findByIdAndDelete(id);
+
+    return result;
+  });
+
+  return placedOrder;
+};
+
 export const CartServices = {
   createCartIntoDB,
   getAllCartsFromDB,
   getOneCartFromDB,
   updateCartIntoDB,
   deleteCartFromDB,
+  placeOrderIntoDB,
 };

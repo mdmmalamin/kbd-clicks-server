@@ -61,10 +61,22 @@ const deleteCart = catchAsync(async (req, res) => {
   });
 });
 
+const placeOrder = catchAsync(async (req, res) => {
+  const result = await CartServices.placeOrderIntoDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order placed successfully!',
+    data: result,
+  });
+});
+
 export const CartControllers = {
   createCart,
   getAllCart,
   getOneCart,
   updateCart,
   deleteCart,
+  placeOrder,
 };
