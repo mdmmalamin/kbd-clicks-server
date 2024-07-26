@@ -41,7 +41,7 @@ const deleteCartFromDB = async (id: string) => {
 const placeOrderIntoDB = async () => {
   const allCarts = await Cart.find().populate('productId');
 
-  const placedOrder = allCarts?.map(async (cart) => {
+  const placedOrder = allCarts?.map(async (cart: TCart) => {
     const orderDetails = {
       id: cart?.productId?._id,
       productQty: cart.productId.quantity as number,
@@ -53,7 +53,7 @@ const placeOrderIntoDB = async () => {
     if (stockQty === 0) {
       await Product.findByIdAndUpdate(
         { _id: orderDetails.id },
-        { quantity: stockQty, isDeleted: true },
+        { quantity: stockQty, status: 'out-of-stock' },
         {
           new: true,
           runValidators: true,
