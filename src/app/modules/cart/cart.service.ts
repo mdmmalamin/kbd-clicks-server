@@ -41,10 +41,10 @@ const deleteCartFromDB = async (id: string) => {
 const placeOrderIntoDB = async () => {
   const allCarts = await Cart.find().populate('productId');
 
-  const placedOrder = allCarts?.map(async (cart: TCart) => {
+  const placedOrder = allCarts?.map(async (cart) => {
     const orderDetails = {
       id: cart?.productId?._id,
-      productQty: cart.productId.quantity as number,
+      productQty: cart?.productId?.quantity as number,
       qty: cart?.orderQty,
     };
 

@@ -12,11 +12,11 @@ app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
 // Application routes
 app.use('/api/v1', router);
 
-const test = async (req: Request, res: Response) => {
+const kbdClicks = async (req: Request, res: Response) => {
   res.send('Welcome to kbd clicks APIs!');
 };
 
-app.get('/', test);
+app.get('/', kbdClicks);
 
 app.use(globalErrorHandler);
 
