@@ -7,7 +7,12 @@ const app: Application = express();
 
 // Parsers
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://kbdclicks.netlify.app'],
+    credentials: true,
+  }),
+);
 
 // Application routes
 app.use('/api/v1', router);
